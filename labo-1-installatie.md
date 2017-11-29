@@ -71,21 +71,21 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - Wat is het commando om de huidige directory op te vragen? Welke uitvoer toont het commando?
 
         ```
-        $ COMMANDO
+        $ COMMANDO pwd
         UITVOER
         ```
 
     - Wat is het UID van deze gebruiker?
 
         ```
-        $ COMMANDO
+        $ COMMANDO id -u
         UITVOER
         ```
 
     - Wat is het GID van deze gebruiker?
 
         ```
-        $ COMMANDO
+        $ COMMANDO id -g
         UITVOER
         ```
 
@@ -93,21 +93,22 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - Wat is de home-directory van `root`?
 
         ```
-        $ COMMANDO
-        UITVOER
+        $ COMMANDO su -
+        $ pwd
+        UITVOER /root
         ```
 
     - Wat is het UID van deze gebruiker?
 
         ```
-        $ COMMANDO
+        $ COMMANDO id -u
         UITVOER
         ```
 
     - Wat is het GID van deze gebruiker?
 
         ```
-        $ COMMANDO
+        $ COMMANDO id -g
         UITVOER
         ```
 
@@ -115,14 +116,14 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - Geef het gebruikte commando:
 
         ```
-        $ COMMANDO
+        $ COMMANDO useradd alice
         UITVOER
         ```
 
     - Voorzie een geschikt wachtwoord voor deze gebruiker (en vergeet het niet! Noteer het eventueel hier in je verslag of in de beschrijving van je VM)
 
         ```
-        $ COMMANDO
+        $ COMMANDO passwd alice //alice
         UITVOER
         ```
 
@@ -130,68 +131,68 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - In welk bestand kan je de UID, gebruikersnaam, homedirectory, enz. van alle gebruikers terugvinden?
 
         ```
-        /PAD/NAAR/BESTAND
+        /PAD/NAAR/BESTAND /etc/passwd
         ```
 
     - In welk configuratiebestand kan je al de bestaande gebruikersgroepen nakijken, en ook de gebruikers die lid zijn van elke groep?
 
         ```
-        /PAD/NAAR/BESTAND
+        /PAD/NAAR/BESTAND /etc/group
         ```
 
     - In welk configuratiebestand vind je de *wachtwoorden* van alle gebruikers?
 
         ```
-        /PAD/NAAR/BESTAND
+        /PAD/NAAR/BESTAND /etc/shadow
         ```
 
 5. Gebruikersgroepen aanmaken
     - Maak een groep aan met de naam `sporten`
 
         ```
-        $ COMMANDO
+        $ COMMANDO groupadd sporten
         UITVOER
         ```
 
     - In welk configuratiebestand vind je het GID van deze groep terug?
 
         ```
-        $ COMMANDO
+        $ COMMANDO /etc/group
         UITVOER
         ```
 
     - Wat zal het GID zijn van de groepen `zwemmen` en `judo` als je deze nu onmiddellijk zou aanmaken? Maak ze aan en controleer!
 
         ```
-        $ COMMANDO
+        $ COMMANDO 1003 1004
         UITVOER
         ```
 
     - Voeg de gebruiker `alice` toe aan de groepen `sporten` en `zwemmen`
 
         ```
-        $ COMMANDO
+        $ COMMANDO usermod -G sporten,zwemmen alice
         UITVOER
         ```
 
     - Log in als `alice` door in een terminal het commando `su - alice` (let op de spaties!) uit te voeren
 
         ```
-        $ COMMANDO
+        $ COMMANDO su - alice
         UITVOER
         ```
 
     - Zorg er nu voor dat de groep `sporten` de primaire groep wordt van `alice`.
 
         ```
-        $ COMMANDO
+        $ COMMANDO enkel met root
         UITVOER
         ```
 
     - Zorg er voor dat `alice` uitgelogd is, ga terug naar `root`
 
         ```
-        $ COMMANDO
+        $ COMMANDO su -
         UITVOER
         ```
 
@@ -207,7 +208,7 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - Geef de gebruikte commando's om de gebruikers aan te maken en ook om te verifiëren of dit correct gebeurd is:
 
         ```
-        $ COMMANDO
+        $ COMMANDO useradd -g sporten -G judo bob
         UITVOER
         $ COMMANDO
         UITVOER
@@ -217,70 +218,70 @@ Tussen de vragen is ruimte voorzien om je antwoorden in te vullen. Het gaat telk
     - Verwijder nu de *groep* `alice` en controleer.
 
         ```
-        $ COMMANDO
+        $ COMMANDO groupdel alice
         UITVOER
         ```
 
     - Gebruiker `daniel` gaat een tijdje niet meer sporten. Zorg er voor dat deze gebruiker tot nader order geen toegang meer kan hebben tot het systeem (zonder het wachtwoord of de gebruiker te verwijderen!).
 
         ```
-        $ COMMANDO
+        $ COMMANDO usermod -L daniel
         UITVOER
         ```
 
     - Hoe kan je controleren dat `daniel` inderdaad geen toegang meer heeft tot het systeem? In welk bestand kan dat en hoe zie je daar dan dat het account afgesloten is?
 
         ```
-        $ COMMANDO
+        $ COMMANDO passwd -S daniel
         UITVOER
         ```
 
     - Gebruiker `daniel` komt terug naar de sportclub. Geef hem opnieuw toegang tot het systeem.
 
         ```
-        $ COMMANDO
+        $ COMMANDO usermod -U daniel
         UITVOER
         ```
 
     - Gebruiker `eva` stopt helemaal met sporten. Verwijder deze gebruiker, maar doe dit zorgvuldig: zorg er in het bijzonder voor dat ook haar homedirectory verwijderd wordt.
 
         ```
-        $ COMMANDO
+        $ COMMANDO userdel -r eva
         UITVOER
         ```
 
 7. Log aan als de gebruiker `carol`
 
     ```
-    $ COMMANDO
+    $ COMMANDO su - carol
     UITVOER
     ```
 
     - Controleer of je in de “thuismap” bent van deze gebruiker. Maak onder deze map een bestand `test` aan door middel van het commando `touch`.
 
         ```
-        $ COMMANDO
+        $ COMMANDO touch test
         UITVOER
         ```
 
     - Probeer nu als gebruiker `carol` je te verplaatsen naar de “thuismap” van `alice`.
 
         ```
-        $ COMMANDO
+        $ COMMANDO cd /home/alice
         UITVOER
         ```
 
     - Kan je de inhoud van de mappen binnen de thuismap van `alice` bekijken?
 
         ```
-        $ COMMANDO
+        $ COMMANDO cat /home/alice     of ls
         UITVOER
         ```
 
     - Probeer nu als `carol` onder de “thuismap” van `alice` ook een bestand `test` te maken. Lukt dit? Kan je dit verklaren?
 
         ```
-        $ COMMANDO
+        $ COMMANDO touch /home/alice/test
         UITVOER
         ```
 
